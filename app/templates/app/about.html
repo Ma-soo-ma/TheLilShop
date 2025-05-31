@@ -1,0 +1,76 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% block title %}About{% endblock title %}
+
+
+
+{% block bannerslider %}
+<div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{% static 'app/images/banner/b1.jpg' %}" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'app/images/banner/b2.jpg' %}" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'app/images/banner/b3.jpg' %}" class="d-block w-100" alt="...">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+{% endblock bannerslider %}
+
+
+
+
+
+
+
+
+
+
+
+
+{% block maincontent %}
+<div class="container mt-5">
+    <h2 class="page-title">About Us</h2>
+    
+    <div class="about-section">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="fs-4 text-center">
+                    This is a public limited company having its registered and corporate office at Bwp
+                    City of Pakistan. The company was incorporated in the year 2025 and production commenced in 2025.
+                    This is one of the fastest growing companies in Pakistan.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="page-title">Our Mission</h2>
+    
+    <div class="mission-section">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="fs-4 text-center">
+                    The company manufactures a wide range of products in the dairy industry.
+                    The company is one of the leading manufacturers of products in Pakistan.
+                    The company is one of the leading manufacturers of products in Pakistan.
+                    To be the best in the dairy industry.
+                    To provide the best quality products to the customers.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock maincontent %}

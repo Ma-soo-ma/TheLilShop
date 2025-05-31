@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'app/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'app/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'app/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'app/css/custom.css' %}">
+    <title>Dairy Products | {% block title %}{% endblock title %}</title>
+    <style>
+        .auth-buttons .nav-link {
+            padding: 0.5rem 1rem;
+            margin: 0 0.25rem;
+            border-radius: 4px;
+        }
+        .auth-buttons .register-btn {
+            background-color: #ffffff;
+            color: #9B7CB9 !important;
+            font-weight: 500;
+        }
+        .auth-buttons .login-btn {
+            border: 1px solid #ffffff;
+        }
+        @media (max-width: 991px) {
+            .auth-buttons {
+                margin-top: 1rem;
+                flex-direction: row !important;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">The Lil' shop</a>
+
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Products
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{% url 'category' 'ML' %}">Milk</a></li>
+                  <li><a class="dropdown-item" href="{% url 'category' 'MS' %}">Milkshake</a></li>
+                  <li><a class="dropdown-item" href="{% url 'category' 'CR' %}">Curd</a></li>
+                  <li><a class="dropdown-item" href="{% url 'category' 'LS' %}">Lassi</a></li>
+                  <li><a class="dropdown-item" href="{% url 'category' 'GH' %}">Ghee</a></li>
+                  <li><a class="dropdown-item" href="{% url 'category' 'PN' %}">Paneer</a></li>
+                  <li><a class="dropdown-item" href="{% url 'category' 'CH' %}">Cheese</a></li>
+                  <li><a class="dropdown-item" href="{% url 'category' 'IC' %}">Ice-creams</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="{% url 'about' %}">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="{% url 'contact' %}">Contact Us</a>
+              </li>
+            </ul>
+            <form class="d-flex me-3" role="search" action="/search">
+              <input class="form-control me-2" type="search" placeholder="Search"name="search" aria-label="Search">
+              <button class="btn btn-light" type="submit" style="color: #B19CD9;">Search</button>
+            </form>
+          </div>
+          
+          <ul class="navbar-nav auth-buttons">
+            {% if user.is_authenticated %}
+              <li class="nav-item dropdown mx-2">
+                <a class="nav-link dropdown-toggle text-white" href="#" 
+                   id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{user.username}}</a>
+                <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                  <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
+                  <li><a class="dropdown-item" href="{% url 'orders' %}">Orders</a></li>
+                  <li><a class="dropdown-item" href="{% url 'changepassword' %}">Change Password</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li>
+                    <form action="{% url 'logout' %}" method="POST" class="d-inline">
+                      {% csrf_token %}
+                      <button type="submit" class="dropdown-item">Logout</button>
+                    </form>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item mx-2"><a href="{% url 'showcart' %}" class="nav-link text-white"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+              <li class="nav-item mx-2"><a href="{% url 'wishlist' %}" class="nav-link text-white"><i class="fas fa-heart"></i> Wishlist</a></li>
+            {% else %}
+              <li class="nav-item mx-2"><a href="{% url 'login' %}" class="nav-link text-white login-btn">Login</a></li>
+              <li class="nav-item mx-2"><a href="{% url 'customerregistration' %}" class="nav-link register-btn">Register</a></li>
+            {% endif %}
+          
+          </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        {% block bannerslider %}{% endblock bannerslider %}
+        {% block information %}{% endblock information %}
+        {% block maincontent %}{% endblock maincontent %}
+    </div>
+
+    <footer class="container-fluid footer mt-5">
+        <div class="footer-content">
+            <div class="copyright">
+                Copyright © 2025 The Lil' Shop | Developed by: Masooma Batool
+            </div>
+            <ul class="footer-links">
+                <li><a href="{% url 'about' %}">About Us</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+            </ul>
+            <div class="social-links">
+                <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Load jQuery first -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Then Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.min.js"></script>
+    <!-- Then other JS files -->
+    <script src="{% static 'app/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'app/js/all.min.js' %}"></script>
+    <script src="{% static 'app/js/myscript.js' %}"></script>
+    <script>
+       
+    </script>
+</body>
+
+</html>
